@@ -1,15 +1,27 @@
-
+import java.util.Random;
 public class BankAccount {
         private double checkingBal = 0;
         private double savingsBal = 0;
+        private long accountNumber;
         static int numOfAccounts = 0;
         static double sumOfAccounts = 0;
         public BankAccount(double checkingBal, double savingsBal){
           this.checkingBal = checkingBal;
           this.savingsBal = savingsBal;
+          this.accountNumber = this.generateAccountNumber();
           numOfAccounts++;
           sumOfAccounts+=(checkingBal + savingsBal);
         }
+  private long generateAccountNumber(){
+    Random random = new Random();
+    long number = random.nextLong();
+    number = Math.abs(number);
+    number = number % 10000000000L;
+    return number;
+  }
+  public long getAccountNumber(){
+    return this.accountNumber;
+  }
 
   public double getCheckingBal() {
     return this.checkingBal;

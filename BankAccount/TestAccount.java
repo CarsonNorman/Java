@@ -7,6 +7,7 @@ public class TestAccount {
         accountTwo.view();
         accountTwo.withdraw(1, 1100);
         accountTwo.withdraw(1, 900);
+        System.out.println(accountTwo.getAccountNumber());
 
         System.out.println(BankAccount.numOfAccounts);
         System.out.println(BankAccount.sumOfAccounts);
