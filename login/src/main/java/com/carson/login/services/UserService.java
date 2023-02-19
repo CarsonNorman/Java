@@ -35,8 +35,9 @@ public class UserService {
     }
     public User login(LoginUser newLogin, BindingResult result) {
         Optional<User> potentialUser = userRepo.findByEmail(newLogin.getEmail());
-        User user = potentialUser.get();
+        User user = null;
         if(potentialUser.isPresent()){
+            user = potentialUser.get();
             if(!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) {
                 result.rejectValue("password", "Matches", "Invalid Password!");
             }
@@ -44,6 +45,6 @@ public class UserService {
             return null;
           }
         }
-        return user;
+    return user;
     }
 }

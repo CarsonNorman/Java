@@ -62,7 +62,6 @@ public class MainController {
             BindingResult result, Model model, HttpSession session) {
         
         // Add once service is implemented:
-        System.out.println("-------------------------Ran------------------");
         User user = userServ.login(newLogin, result);
     
         if(result.hasErrors()) {
