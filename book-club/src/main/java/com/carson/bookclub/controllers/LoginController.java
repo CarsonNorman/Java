@@ -52,7 +52,7 @@ public class LoginController {
         // No errors! 
         // TO-DO Later: Store their ID from the DB in session, 
         // in other words, log them in.
-        session.setAttribute("id", user.getId());
+        session.setAttribute("userId", user.getId());
         session.setAttribute("username", user.getUsername());
     
         return "redirect:/books";
@@ -73,7 +73,7 @@ public class LoginController {
         // No errors! 
         // TO-DO Later: Store their ID from the DB in session, 
         // in other words, log them in.
-        session.setAttribute("id", user.getId());
+        session.setAttribute("userId", user.getId());
         session.setAttribute("username", user.getUsername());
     
         return "redirect:/books";

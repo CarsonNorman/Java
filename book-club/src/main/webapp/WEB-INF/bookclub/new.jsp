@@ -21,9 +21,13 @@
 
 <body class="w-100">
     <div class="w-100 d-flex  justify-content-around">
-        <h3>Add to shelf</h3>
+        <c:if test="${edit != true}">
+                <h1>Add to shelves</h1>
+            </c:if>
+            <c:if test="${edit == true}">
+                <h1>Update Shelves</h1>
+            </c:if>
         <a href="/books">Back</a>
-        <h1>${id}</h1>
     </div>
     <div class="w-50 d-flex  justify-content-around mx-auto">
         <form:form action="/book" method="post" modelAttribute="newBook" class="w-50">
@@ -34,22 +38,27 @@
             </div>
             <div >
                 <form:label path="title">title</form:label>
-                <form:input path="title" class="form-control"></form:input>
+                <form:input path="title" value="${book.title}" class="form-control"></form:input>
             </div>
             <div >
                 <form:label path="author">author</form:label>
-                <form:input path="author" class="form-control"></form:input>
+                <form:input path="author" value="${book.author}" class="form-control"></form:input>
             </div>
             <div >
                 <form:label path="thoughts">thoughts</form:label>
-                <form:textarea path="thoughts" class="form-control"></form:textarea>
+                <form:input path="thoughts" value="${book.thoughts}" class="form-control"></form:input>
             </div>
-            <div >
-                <form:input path="user" value="${id}" type="hidden" class="form-control"></form:input>
+            <div>
+                <form:input path="user" value="${userId}" type="hidden" class="form-control"></form:input>
+
             </div>
-            <div >
-                <input type="submit" value="Submit" class="form-control"/>
-            </div>
+            <c:if test="${edit != true}">
+                <input type="submit" value="add book">
+            </c:if>
+            <c:if test="${edit == true}">
+                <input type="hidden" name="_method" value="put">
+                <input type="submit" formaction="/books/edit" value="edit">
+            </c:if>
         </form:form>
         
     </div>

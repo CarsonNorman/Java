@@ -22,7 +22,7 @@
 <body>
   <div id="nav" class="d-flex justify-content-around w-100">
     <h1>
-      Hello ${username}
+      Hello ${username} ${id}
     </h1>
     <div>
 

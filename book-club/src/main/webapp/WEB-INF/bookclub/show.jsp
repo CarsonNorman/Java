@@ -29,6 +29,15 @@
             ${book.user.username} read ${book.title} by ${book.author}</h3>
         <h4>Here are ${book.user.username} thoughts</h4>
         <p>${book.thoughts}</p>
+        <div class="w-25 mx-auto d-flex  justify-content-around align-items-center">
+            <c:if test="${userId == book.user.id}">
+                <a href="/books/edit/${book.id}" class="btn btn-info btn-sm">Edit</a> 
+                <form action="/books/delete/${book.id}" method="post">
+                    <input type="hidden" name="_method"  value="Delete">
+                    <input type="submit" value="delete" class="btn btn-danger btn-sm">
+                </form>
+        </c:if>            
+    </div>
     </div>
 
 </body>

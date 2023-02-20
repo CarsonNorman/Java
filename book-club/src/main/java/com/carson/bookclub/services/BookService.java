@@ -25,4 +25,10 @@ public class BookService {
         Optional<Book>book = bookRepo.findById(id);
         return book.orElse(null);
     }
+    public void deleteBook(Book book){
+        bookRepo.delete(book);
+    }
+    public Book editBook(Book book){
+        return bookRepo.save(book);
+    }
 }
