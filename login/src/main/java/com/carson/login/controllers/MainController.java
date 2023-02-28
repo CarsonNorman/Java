@@ -2,7 +2,6 @@ package com.carson.login.controllers;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -92,8 +91,5 @@ public class MainController {
         session.removeAttribute("username");
         return "redirect:/";
     }
-    
-    
-  
-    
+ 
 }

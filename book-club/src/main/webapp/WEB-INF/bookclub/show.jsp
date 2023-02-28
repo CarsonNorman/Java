@@ -36,7 +36,11 @@
                     <input type="hidden" name="_method"  value="Delete">
                     <input type="submit" value="delete" class="btn btn-danger btn-sm">
                 </form>
-        </c:if>            
+        </c:if>
+        <c:if test="${userId != book.user.id}">
+                <a href="/books/borrow/${book.id}" class="btn btn-info btn-sm">Add to borrowed collection</a> 
+                </form>
+        </c:if>               
     </div>
     </div>
 

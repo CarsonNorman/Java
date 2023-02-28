@@ -34,16 +34,21 @@ public class UserService {
     }
     public User login(LoginUser newLogin, BindingResult result) {
         Optional<User> potentialUser = userRepo.findByEmail(newLogin.getEmail());
-        User user = null;
+
         if(potentialUser.isPresent()){
-            user = potentialUser.get();
-            if(!BCrypt.checkpw(newLogin.getPassword(), user.getPassword())) {
+            if(!BCrypt.checkpw(newLogin.getPassword(), potentialUser.orElseThrow().getPassword())) {
                 result.rejectValue("password", "Matches", "Invalid Password!");
-            }
-          if(result.hasErrors()){
+            } 
+        }else{
+            result.rejectValue("email", "Email", "Invalid Email");
+        }
+        if(result.hasErrors()){
             return null;
           }
-        }
-    return user;
+    return potentialUser.orElse(null);
+    }
+    public User getUser(Long id){
+        Optional<User>book = userRepo.findById(id);
+        return book.orElse(null);
     }
 }

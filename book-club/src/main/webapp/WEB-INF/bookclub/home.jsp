@@ -54,7 +54,12 @@
         
       </tbody>
     </table>
-    
+    <h1>
+      ${user.id}
+      <c:forEach var="borrowed" items="${borrowed}">
+        <h1>${borrowed.title}</h1>
+      </c:forEach>
+    </h1>
   </div>
 </body>
 

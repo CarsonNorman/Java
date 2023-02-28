@@ -1,6 +1,7 @@
 package com.carson.bookclub.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -42,12 +45,21 @@ public class Book {
     @JoinColumn(name="users_id")
     private User user;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name="borrow",
+        joinColumns = @JoinColumn(name="books.id"),
+        inverseJoinColumns = @JoinColumn(name="users.id")
+    )
+    private List<User> bUsers;
+
+
 
 
     public Book() {
     }
 
-    public Book(Long id, String title, String author, String thoughts, Date created_at, Date updated_at, User user) {
+    public Book(Long id, String title, String author, String thoughts, Date created_at, Date updated_at, User user, List<User> bUsers) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -55,6 +67,7 @@ public class Book {
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.user = user;
+        this.bUsers = bUsers;
     }
 
     public Long getId() {
@@ -111,6 +124,14 @@ public class Book {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<User> getBUsers() {
+        return this.bUsers;
+    }
+
+    public void setBUsers(List<User> bUsers) {
+        this.bUsers = bUsers;
     }
     
 

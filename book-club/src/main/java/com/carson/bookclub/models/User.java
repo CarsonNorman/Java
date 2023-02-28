@@ -7,6 +7,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -40,26 +43,27 @@ public class User {
     private String confirm;
     @OneToMany(mappedBy = "user", fetch=FetchType.LAZY)
     private List<Book> books;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name="borrow",
+        joinColumns = @JoinColumn(name="users.id"),
+        inverseJoinColumns = @JoinColumn(name="books.id")
+    )
+    private List<Book> bBooks;
   
-    public User() {}
 
+    public User() {
+    }
 
-    public User(Long id, String userName, String email, String password, String confirm, List<Book> books) {
+    public User(Long id, String username, String email, String password, String confirm, List<Book> books, List<Book> bBooks) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.confirm = confirm;
         this.books = books;
-    }
-
-
-    public List<Book> getBooks() {
-        return this.books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
+        this.bBooks = bBooks;
     }
 
     public Long getId() {
@@ -100,7 +104,25 @@ public class User {
 
     public void setConfirm(String confirm) {
         this.confirm = confirm;
-    } 
+    }
+
+    public List<Book> getBooks() {
+        return this.books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    public List<Book> getBBooks() {
+        return this.bBooks;
+    }
+
+    public void setBBooks(List<Book> bBooks) {
+        this.bBooks = bBooks;
+    }
+    
+   
 }
 
     
